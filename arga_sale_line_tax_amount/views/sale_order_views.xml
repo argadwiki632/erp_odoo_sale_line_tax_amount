@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form_line_tax_amount" model="ir.ui.view">
+        <field name="name">sale.order.form.line.tax.amount</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_tax']" position="replace"/>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='tax_id']" position="after">
+                <field name="price_tax" string="Tax Amount" widget="monetary"
+                       options="{'currency_field': 'currency_id'}"
+                       readonly="1" optional="show" invisible="display_type"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/form//field[@name='price_tax']" position="replace"/>
+            <xpath expr="//field[@name='order_line']/form//field[@name='tax_id']" position="after">
+                <field name="currency_id" invisible="1"/>
+                <field name="price_tax" string="Tax Amount" widget="monetary"
+                       options="{'currency_field': 'currency_id'}"
+                       readonly="1" invisible="display_type"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
